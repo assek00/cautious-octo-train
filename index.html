@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoSmart City - Smart Waste Management</title>
+  <!-- IMPORTANT: use external CSS so edits in style.css actually show up -->
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand">EcoSmart City</div>
+    <div class="nav-links">
+      <a data-page="dashboard" class="active-link">Dashboard</a>
+      <a data-page="reporting">Report</a>
+      <a data-page="schedule">Schedule</a>
+      <a data-page="education">Education</a>
+      <a data-page="tracking">Tracking</a>
+      <a data-page="contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div id="alert" class="alert"></div>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+  <h2>Waste Management Dashboard</h2>
+
+  <div class="cards" style="margin-top: 12px;">
+    <div class="card blue" style="flex: 1; min-width: 240px;">
+      <h3>Issues Reported</h3>
+      <p class="big-number" id="statReported">124</p>
+    </div>
+    <div class="card green" style="flex: 1; min-width: 240px;">
+      <h3>Issues Resolved</h3>
+      <p class="big-number" id="statResolved">89</p>
+    </div>
+    <div class="card orange" style="flex: 1; min-width: 240px;">
+      <h3>Active Initiatives</h3>
+      <p class="big-number" id="statInitiatives">12</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 16px;">
+    <h3>Global Cleanliness Initiatives (brief)</h3>
+
+    <div class="two-col" style="margin-top: 10px;">
+      <div>
+        <ul class="initiative-list">
+          <li><b>Rwanda – plastic bag ban:</b> one of the world’s strictest bans, pushing reusable packaging and cleaner streets.</li>
+          <li><b>Sweden – waste‑to‑energy:</b> converts residual waste into district heating and electricity, reducing landfill use.</li>
+          <li><b>Germany – “Green Dot” system:</b> producer responsibility encourages packaging reduction and recycling.</li>
+          <li><b>Japan – strict sorting rules:</b> detailed separation schedules improve material recovery and reduce contamination.</li>
+          <li><b>South Korea – pay‑as‑you‑throw:</b> households pay based on waste volume, strongly incentivizing separation.</li>
+          <li><b>Singapore – Clean &amp; Green:</b> national campaigns + enforcement keep public areas consistently clean.</li>
+          <li><b>India – Swachh Bharat:</b> large-scale sanitation/cleanliness program with community drives and infrastructure.</li>
+          <li><b>San Francisco – composting:</b> citywide organics collection reduces landfill methane and boosts diversion rates.</li>
+        </ul>
+        <p style="opacity:.8; margin-top:10px; font-size:13px;">
+          Diagram shows example “diversion effort index” (illustrative), to compare focus across initiatives.
+        </p>
+      </div>
+
+      <div class="chart-wrap">
+        <canvas id="initiativeChart" width="520" height="320" aria-label="Initiatives diagram" role="img"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- REPORTING -->
+    <section id="reporting" class="page">
+
+  <div class="report-layout">
+
+    <!-- LEFT IMAGE -->
+    <div class="report-side">
+     <img src="images/left.png">
+
+    </div>
+
+    <!-- CENTER FORM (ТВОЙ КОД, НЕ МЕНЯЕМ) -->
+    <div class="report-center">
+      <div class="card" style="max-width: 920px;">
+        <h2>Report Waste Issue</h2>
+
+        <form id="reportForm">
+          <p>
+            <label>Type</label>
+            <select id="wType" required>
+              <option value="">Select type...</option>
+              <option value="overflow">Garbage Overflow</option>
+              <option value="plastic">Plastic Waste</option>
+              <option value="toxic">Hazardous Waste</option>
+            </select>
+          </p>
+
+          <p>
+            <label>Location</label>
+            <input type="text" id="wLoc" required placeholder="Enter address" />
+          </p>
+
+          <p>
+            <label>Description</label>
+            <textarea id="wDesc" required rows="4" placeholder="Describe the problem..."></textarea>
+          </p>
+
+          <button type="submit">Submit</button>
+
+          <p style="opacity:0.75;margin-top:10px;font-size:13px;">
+            P.S: your contribution help us to become stronger
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="report-side">
+      <img src="images/right.jpg" alt="Waste management">
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- SCHEDULE -->
+    <section id="schedule" class="page">
+      <div class="card" style="max-width: 980px;">
+        <h2>Collection Schedule</h2>
+        <input type="text" id="searchArea" placeholder="Search area..." />
+        <div style="margin-top: 10px;">
+          <table id="schedTable">
+            <thead>
+              <tr><th>Area</th><th>Type</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+<tr><td>Almaty (KZ)</td><td>General</td><td>2026-01-20</td></tr>
+<tr><td>Tokyo (JP)</td><td>Recycle</td><td>2026-01-21</td></tr>
+<tr><td>Stockholm (SE)</td><td>Residual</td><td>2026-01-22</td></tr>
+<tr><td>Singapore (SG)</td><td>General</td><td>2026-01-23</td></tr>
+<tr><td>Kigali (RW)</td><td>Plastic</td><td>2026-01-24</td></tr>
+<tr><td>Berlin (DE)</td><td>Recycling</td><td>2026-01-25</td></tr>
+<tr><td>Seoul (KR)</td><td>Food/Organics</td><td>2026-01-26</td></tr>
+<tr><td>Amsterdam (NL)</td><td>Paper</td><td>2026-01-27</td></tr>
+<tr><td>Sydney (AU)</td><td>Green Waste</td><td>2026-01-28</td></tr>
+<tr><td>Nairobi (KE)</td><td>General</td><td>2026-01-29</td></tr>
+<tr><td>São Paulo (BR)</td><td>Recycling</td><td>2026-01-30</td></tr>
+<tr><td>New York (US)</td><td>Compost</td><td>2026-01-31</td></tr>
+</tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="page">
+      <h2>Education</h2>
+      <div class="edu-grid" style="margin-top: 12px;">
+        <div class="edu-card" style="border-left-color:#4299e1;">
+          <h3>Recyclable Waste</h3>
+          <p>Recyclable waste includes clean paper and cardboard, glass bottles and jars, aluminum/steel cans, and many rigid plastics (where accepted). Keep items empty and dry, and flatten boxes to save space—clean streams recycle better and cost less to process.</p>
+        </div>
+        <div class="edu-card" style="border-left-color:#e53e3e;">
+          <h3>Non‑recyclable</h3>
+          <p>Non‑recyclable waste is anything contaminated or made from mixed materials that can’t be separated economically—food‑soiled paper, some wrappers/laminates, ceramics, and broken light bulbs (often treated as special waste). When in doubt, check local rules to avoid contaminating the recycling bin.</p>
+        </div>
+        <div class="edu-card" style="border-left-color:#38a169;">
+          <h3>Segregation Tips</h3>
+          <p>Segregation works best when you separate at the source: keep three small bins (recycling, organics, landfill) and label them clearly. Rinse containers, remove leftover liquids, and keep plastic film/bags separate if your city doesn’t accept them—good habits make global collection and processing more effective.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACKING -->
+    <section id="tracking" class="page">
+      <div class="card">
+        <h2>Issue Tracking</h2>
+        <p style="opacity:0.8;">Demo list (you can connect this to <code>app.py</code> later).</p>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Type</th><th>Status</th></tr>
+          </thead>
+          <tbody id="trackingBody">
+<tr><td>1</td><td>Overflow</td><td><span class="status progress">In Progress</span></td></tr>
+<tr><td>2</td><td>Chemicals</td><td><span class="status resolved">Resolved</span></td></tr>
+<tr><td>3</td><td>Plastic Litter</td><td><span class="status reported">Reported</span></td></tr>
+<tr><td>4</td><td>E‑waste (electronics)</td><td><span class="status scheduled">Scheduled</span></td></tr>
+<tr><td>5</td><td>Construction Debris</td><td><span class="status progress">In Progress</span></td></tr>
+<tr><td>6</td><td>Glass Waste</td><td><span class="status scheduled">Scheduled</span></td></tr>
+<tr><td>7</td><td>Paper/Cardboard</td><td><span class="status resolved">Resolved</span></td></tr>
+<tr><td>8</td><td>Metal Scrap</td><td><span class="status progress">In Progress</span></td></tr>
+<tr><td>9</td><td>Organic/Food Waste</td><td><span class="status reported">Reported</span></td></tr>
+<tr><td>10</td><td>Medical Sharps</td><td><span class="status scheduled">Scheduled</span></td></tr>
+<tr><td>11</td><td>Textiles</td><td><span class="status reported">Reported</span></td></tr>
+<tr><td>12</td><td>Batteries</td><td><span class="status progress">In Progress</span></td></tr>
+<tr><td>13</td><td>Tires/Rubber</td><td><span class="status scheduled">Scheduled</span></td></tr>
+<tr><td>14</td><td>Bulky Items (furniture)</td><td><span class="status reported">Reported</span></td></tr>
+<tr><td>15</td><td>Street Litter</td><td><span class="status progress">In Progress</span></td></tr>
+<tr><td>16</td><td>Hazardous Paint</td><td><span class="status scheduled">Scheduled</span></td></tr>
+<tr><td>17</td><td>Waterway Pollution</td><td><span class="status reported">Reported</span></td></tr>
+</tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page">
+      <div class="card" style="max-width: 920px;">
+        <h2>Contact Municipal Services</h2>
+        <form id="contactForm" action="contact.php" method="POST">
+          <p>
+            <label>Email</label>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </p>
+          <p>
+            <label>Message</label>
+            <textarea name="message" required rows="4" placeholder="How can we help?"></textarea>
+          </p>
+          <button type="submit">Send</button>
+          <p style="opacity:0.75; margin-top: 10px; font-size: 13px;">
+        
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 ecosmartcity</footer>
+
+  <!-- IMPORTANT: use external JS so edits in app.js actually show up -->
+  <script src="app.js?v=1"></script>
+</body>
+</html>
+
